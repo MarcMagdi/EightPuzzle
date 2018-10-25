@@ -71,60 +71,60 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
     }
 
     private List<State> processState(State state) {
-//        List<State> states = addStateToMap(state, 0);
         List<State> states = getPathFromGoalToInitialState(state);
         Collections.reverse(states);
         return states;
     }
 
     private List<State> getPathFromGoalToInitialState(State state) {
-        Set<Integer> set = new HashSet<>();
-        Stack<State> stack = new Stack<>();
-        stack.push(state);
+        Stack<StackDTO> stack = new Stack<>();
+        stack.push(new StackDTO(state, 0));
         while (!stack.isEmpty()) {
-            State curr = stack.pop();
-            set.add(curr.getId());
-            if (BoardHelper.getInstance().isGoalBoard(curr.getBoard())) {
+            StackDTO curr = stack.pop();
+            this.maxDepth = Math.max(this.maxDepth, curr.getCost());
+            if (BoardHelper.getInstance().isGoalBoard(curr.getState().getBoard())) {
+                this.goalCost = curr.getCost();
                 List<State> states = new ArrayList<>();
-                while (curr != null) {
-                    states.add(curr);
-                    curr = curr.getParent();
+                State currentState = curr.getState();
+                while (currentState != null) {
+                    states.add(currentState);
+                    currentState = currentState.getParent();
                 }
                 return states;
             }
-            List<State> children = curr.getChildren();
+            List<State> children = curr.getState().getChildren();
             if (children != null) {
-                for (State child : curr.getChildren()) {
-                    if (set.contains(child.getId())) {
-                        System.out.println("ERRROR: ");
-                        return null;
-                    }
-                    stack.push(child);
+                for (State child : curr.getState().getChildren()) {
+                    stack.push(new StackDTO(child, curr.getCost() + 1));
                 }
             }
         }
-        System.out.println("hello world");
         return null;
     }
 
-    private List<State> addStateToMap(State state, Integer cost) {
-        List<State> states = null;
-        this.maxDepth = Math.max(this.maxDepth, cost);
-        if (BoardHelper.getInstance().isGoalBoard(state.getBoard())) {
-            this.goalCost = cost;
-            State curr = state;
-            states = new ArrayList<>();
-            while (curr != null) {
-                states.add(curr);
-                curr = curr.getParent();
-            }
+    class StackDTO {
+        private State state;
+        private int cost;
+
+        public StackDTO(State state, int cost) {
+            this.state = state;
+            this.cost = cost;
         }
-        for (State child : state.getChildren()) {
-            List<State> childStates = addStateToMap(child, cost + 1);
-            if (childStates != null) {
-                states = childStates;
-            }
+
+        public State getState() {
+            return state;
         }
-        return states;
+
+        public void setState(State state) {
+            this.state = state;
+        }
+
+        public int getCost() {
+            return cost;
+        }
+
+        public void setCost(int cost) {
+            this.cost = cost;
+        }
     }
 }
