@@ -249,12 +249,13 @@ public class SolvingAreaController implements Initializable {
 
     void showPath(List<State> states) {
         AnchorPane anchorPane = new AnchorPane();
-        for (int i = 0; i < states.size(); i++) {
+        for (int i = 0; i < Math.min(states.size(), 500); i++) {
             Difference difference = null;
             if (i != states.size() - 1) {
                 difference = states.get(i+1).getDifference(states.get(i));
             }
             anchorPane.getChildren().add(createPuzzleInstance(states.get(i), i, difference));
+            System.out.println(i);
         }
         if (this.initialNode == null) {
             this.initialNode = scrollPane.getContent();

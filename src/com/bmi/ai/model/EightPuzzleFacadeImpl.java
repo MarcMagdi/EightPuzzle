@@ -84,7 +84,6 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
         while (!stack.isEmpty()) {
             State curr = stack.pop();
             set.add(curr.getId());
-            System.out.println(set.size());
             if (BoardHelper.getInstance().isGoalBoard(curr.getBoard())) {
                 List<State> states = new ArrayList<>();
                 while (curr != null) {
@@ -104,6 +103,7 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
                 }
             }
         }
+        System.out.println("hello world");
         return null;
     }
 
