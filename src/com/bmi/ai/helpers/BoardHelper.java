@@ -45,7 +45,7 @@ public class BoardHelper {
         System.out.println(stringBuilder.toString());
     }
 
-    public List<Board> getNeighbouringStates(Board board) throws InvalidArgumentException {
+    public List<Board> getNeighbouringStates(Board board) {
         List<Board> nextStates = new ArrayList<>();
         IndexPair indices = getZeroIndices(board);
         for (int[] dir : directions) {
@@ -57,7 +57,7 @@ public class BoardHelper {
         return nextStates;
     }
 
-    private IndexPair getZeroIndices(Board board) throws InvalidArgumentException {
+    private IndexPair getZeroIndices(Board board) {
         char[][] matrix = board.getMatrix();
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
@@ -66,7 +66,7 @@ public class BoardHelper {
                 }
             }
         }
-        throw new InvalidArgumentException(new String[]{"Invalid Board State"});
+        return null;
     }
 
     private boolean isValidIndex(int x, int y) {

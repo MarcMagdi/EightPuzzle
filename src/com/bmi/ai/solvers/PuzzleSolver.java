@@ -8,5 +8,5 @@ import com.sun.javaws.exceptions.InvalidArgumentException;
  * Created by programajor on 10/16/18.
  */
 public interface PuzzleSolver {
-    State solve(Board board) throws InvalidArgumentException;
+    State solve(Board board);
 }

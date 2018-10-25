@@ -10,10 +10,7 @@ import com.bmi.ai.solvers.BFSPuzzleSolver;
 import com.bmi.ai.solvers.DFSPuzzleSolver;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by programajor on 10/25/18.
@@ -24,45 +21,55 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
     private Integer goalCost;
 
     @Override
-    public List<State> solvePuzzleByDFS(Board board) throws InvalidArgumentException {
+    public List<State> solvePuzzleByDFS(Board board) {
         State state = new DFSPuzzleSolver().solve(board);
         return processState(state);
     }
 
     @Override
-    public List<State> solvePuzzleByBFS(Board board) throws InvalidArgumentException {
+    public List<State> solvePuzzleByBFS(Board board) {
         State state = new BFSPuzzleSolver().solve(board);
         return processState(state);
     }
 
     @Override
-    public List<State> solvePuzzleByAStartManhattan(Board board) throws InvalidArgumentException {
+    public List<State> solvePuzzleByAStartManhattan(Board board) {
         State state = new AStarPuzzleSolver(new ManhattanHeuristic()).solve(board);
         return processState(state);
     }
 
     @Override
-    public List<State> solvePuzzleByAStartEuclidean(Board board) throws InvalidArgumentException {
+    public List<State> solvePuzzleByAStartEuclidean(Board board) {
         State state = new AStarPuzzleSolver(new EuclideanHeuristic()).solve(board);
         return processState(state);
     }
 
     private List<State> processState(State state) {
         this.map = new HashMap<>();
-        addStateToMap(state, 0);
-        List<State> ret = new ArrayList<>();
-        ret.add(state);
-        return ret;
+        List<State> states = addStateToMap(state, 0);
+        Collections.reverse(states);
+        return states;
     }
 
-    private void addStateToMap(State state, Integer cost) {
+    private List<State> addStateToMap(State state, Integer cost) {
+        List<State> states = null;
         map.put(state.getId(), state);
         if (BoardHelper.getInstance().isGoalBoard(state.getBoard())) {
             this.goalCost = cost;
+            State curr = state;
+            states = new ArrayList<>();
+            while (curr != null) {
+                states.add(curr);
+                curr = curr.getParent();
+            }
         }
         for (State child : state.getChildren()) {
-            addStateToMap(child, cost + 1);
+            List<State> childStates = addStateToMap(child, cost + 1);
+            if (childStates != null) {
+                states = childStates;
+            }
         }
+        return states;
     }
 
     @Override

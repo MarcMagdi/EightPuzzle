@@ -20,7 +20,7 @@ public class BFSPuzzleSolver implements PuzzleSolver {
     }
 
     @Override
-    public State solve(Board board) throws InvalidArgumentException {
+    public State solve(Board board) {
         Queue<State> frontier = new LinkedList<>();
         Set<State> explored = new HashSet<>();
         State initial = new State(board);

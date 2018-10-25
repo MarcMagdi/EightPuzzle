@@ -1,5 +1,10 @@
 package com.bmi.ai.controllers;
 
+import com.bmi.ai.model.EightPuzzleFacade;
+import com.bmi.ai.model.EightPuzzleFacadeImpl;
+import com.bmi.ai.models.Board;
+import com.bmi.ai.models.State;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -9,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -22,13 +28,14 @@ import java.util.Set;
 public class ActionsController implements Initializable {
 
     private MainController mainController;
+    private EightPuzzleFacade puzzleFacade;
 
     @FXML
     public Label errorLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.puzzleFacade = new EightPuzzleFacadeImpl();
     }
 
     void init(MainController mainController) {
@@ -53,6 +60,54 @@ public class ActionsController implements Initializable {
                 digits.add(initState[i][j]);
             }
         }
-        return digits.size() == 9;
+        return digits.size() == 9 && !digits.contains(' ');
+    }
+
+    public void solveByBFS(MouseEvent mouseEvent) {
+        char[][] initState = this.mainController.getInitialState();
+        boolean validState = isValid(initState);
+        if (validState) {
+            errorLabel.setText("");
+            List<State> states = puzzleFacade.solvePuzzleByBFS(new Board(initState));
+            this.mainController.showPath(states);
+        } else {
+            errorLabel.setText("Invalid Input");
+        }
+    }
+
+    public void solveByDFS(MouseEvent mouseEvent) {
+        char[][] initState = this.mainController.getInitialState();
+        boolean validState = isValid(initState);
+        if (validState) {
+            errorLabel.setText("");
+            List<State> states = puzzleFacade.solvePuzzleByDFS(new Board(initState));
+            this.mainController.showPath(states);
+        } else {
+            errorLabel.setText("Invalid Input");
+        }
+    }
+
+    public void solveByAStarManhattan(MouseEvent mouseEvent) {
+        char[][] initState = this.mainController.getInitialState();
+        boolean validState = isValid(initState);
+        if (validState) {
+            errorLabel.setText("");
+            List<State> states = puzzleFacade.solvePuzzleByAStartManhattan(new Board(initState));
+            this.mainController.showPath(states);
+        } else {
+            errorLabel.setText("Invalid Input");
+        }
+    }
+
+    public void solveByAStarEuclidean(MouseEvent mouseEvent) {
+        char[][] initState = this.mainController.getInitialState();
+        boolean validState = isValid(initState);
+        if (validState) {
+            errorLabel.setText("");
+            List<State> states = puzzleFacade.solvePuzzleByAStartEuclidean(new Board(initState));
+            this.mainController.showPath(states);
+        } else {
+            errorLabel.setText("Invalid Input");
+        }
     }
 }

@@ -10,10 +10,10 @@ import java.util.List;
  * Created by programajor on 10/25/18.
  */
 public interface EightPuzzleFacade {
-    List<State> solvePuzzleByDFS(Board board) throws InvalidArgumentException;
-    List<State> solvePuzzleByBFS(Board board) throws InvalidArgumentException;
-    List<State> solvePuzzleByAStartManhattan(Board board) throws InvalidArgumentException;
-    List<State> solvePuzzleByAStartEuclidean(Board board) throws InvalidArgumentException;
+    List<State> solvePuzzleByDFS(Board board);
+    List<State> solvePuzzleByBFS(Board board);
+    List<State> solvePuzzleByAStartManhattan(Board board);
+    List<State> solvePuzzleByAStartEuclidean(Board board);
     List<State> getParentLevelStates(int stateId);
     List<State> getDirectChildStates(int stateId);
 

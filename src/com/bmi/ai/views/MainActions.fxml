@@ -8,10 +8,10 @@
 
 <Pane prefHeight="105.0" prefWidth="631.0" BorderPane.alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bmi.ai.controllers.ActionsController">
     <children>
-        <Label layoutX="535.0" layoutY="40.0" textFill="RED" fx:id="errorLabel" />
-        <Button layoutX="14.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="61.0" text="Solve" onMouseClicked="#solve"/>
-        <Button layoutX="109.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="61.0" text="Solve" />
-        <Button layoutX="209.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="61.0" text="Solve" />
-        <Button layoutX="316.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="61.0" text="Solve" />
+        <Label layoutX="1100.0" layoutY="40.0" textFill="RED" fx:id="errorLabel" />
+        <Button layoutX="15.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="250.0" text="Solve by BFS" onMouseClicked="#solveByBFS"/>
+        <Button layoutX="270.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="250.0" text="Solve by DFS" onMouseClicked="#solveByDFS" />
+        <Button layoutX="525.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="250.0" text="Solve by AStar Manhattan" onMouseClicked="#solveByAStarManhattan" />
+        <Button layoutX="780.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="250.0" text="Solve by AStar Euclidean" onMouseClicked="#solveByAStarEuclidean" />
     </children>
 </Pane>

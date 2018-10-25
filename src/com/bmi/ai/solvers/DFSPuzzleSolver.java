@@ -23,7 +23,7 @@ public class DFSPuzzleSolver implements PuzzleSolver {
     }
 
     @Override
-    public State solve(Board board) throws InvalidArgumentException {
+    public State solve(Board board) {
         Stack<State> frontier = new Stack<>();
         Set<State> explored = new HashSet<>();
         State initial = new State(board);

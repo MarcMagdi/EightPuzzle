@@ -27,7 +27,7 @@ public class AStarPuzzleSolver implements PuzzleSolver {
     }
 
     @Override
-    public State solve(Board board) throws InvalidArgumentException {
+    public State solve(Board board) {
         PriorityQueue<HeuristicState> frontier = new PriorityQueue<>();
         Set<State> explored = new HashSet<>();
         HeuristicState initial = new HeuristicState(board,  heuristic.getStateValue(board), 0);

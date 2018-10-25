@@ -1,9 +1,11 @@
 package com.bmi.ai.controllers;
 
+import com.bmi.ai.models.State;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -38,5 +40,9 @@ public class MainController implements Initializable {
 
     char[][] getInitialState() {
         return this.solvingAreaController.getInitialState();
+    }
+
+    public void showPath(List<State> states) {
+        this.solvingAreaController.showPath(states);
     }
 }

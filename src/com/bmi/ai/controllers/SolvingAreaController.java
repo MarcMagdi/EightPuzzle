@@ -191,7 +191,6 @@ public class SolvingAreaController implements Initializable {
                     text.setText(c + "");
                 }
                 stackPane.getChildren().addAll(rectangle, text);
-//                gridPane.getChildren().add(stackPane);
                 gridPane.add(stackPane, j, i);
             }
         }
@@ -211,7 +210,19 @@ public class SolvingAreaController implements Initializable {
                     values[i][j] = text.getText().charAt(0);
             }
         }
-
         return values;
+    }
+
+    void showPath(List<State> states) {
+        System.out.println(states.size());
+        AnchorPane anchorPane = new AnchorPane();
+//        List<GridPane> gridPanes = new ArrayList<>();
+        for (State state : states) {
+            anchorPane.getChildren().add(createPuzzleInstance(state));
+
+//            gridPanes.add(createPuzzleInstance(state));
+        }
+        scrollPane.setContent(anchorPane);
+        scrollPane.setPannable(true);
     }
 }
