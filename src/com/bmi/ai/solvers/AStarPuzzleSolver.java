@@ -29,12 +29,15 @@ public class AStarPuzzleSolver implements PuzzleSolver {
     @Override
     public State solve(Board board) {
         PriorityQueue<HeuristicState> frontier = new PriorityQueue<>();
+        Set<State> frontierSet = new HashSet<>();
         Set<State> explored = new HashSet<>();
         HeuristicState initial = new HeuristicState(board,  heuristic.getStateValue(board), 0);
         initial.setId(counter++);
         frontier.add(initial);
+        frontierSet.add(initial);
         while (!frontier.isEmpty()) {
             HeuristicState curr = frontier.poll();
+            frontierSet.remove(curr);
             explored.add(curr);
 //            boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
@@ -45,11 +48,12 @@ public class AStarPuzzleSolver implements PuzzleSolver {
                 HeuristicState child = new HeuristicState(neighbour,
                                                 heuristic.getStateValue(neighbour),
                                                 curr.getActualCost() + 1);
-                if (!frontier.contains(child) && !explored.contains(child)) {
+                if (!frontierSet.contains(child) && !explored.contains(child)) {
                     child.setId(counter++);
                     child.setParent(curr);
                     curr.getChildren().add(child);
                     frontier.add(child);
+                    frontierSet.add(child);
                 } else {
                     HeuristicState childInFrontier = getStateFromFrontiers(frontier, child);
                     if (childInFrontier != null && childInFrontier.getActualCost() > child.getActualCost()) {

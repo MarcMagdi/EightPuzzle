@@ -25,12 +25,15 @@ public class DFSPuzzleSolver implements PuzzleSolver {
     @Override
     public State solve(Board board) {
         Stack<State> frontier = new Stack<>();
+        Set<State> frontierSet = new HashSet<>();
         Set<State> explored = new HashSet<>();
         State initial = new State(board);
         initial.setId(counter++);
         frontier.push(initial);
+        frontierSet.add(initial);
         while (!frontier.isEmpty()) {
             State curr = frontier.pop();
+            frontierSet.remove(curr);
             explored.add(curr);
 //            boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
@@ -39,11 +42,12 @@ public class DFSPuzzleSolver implements PuzzleSolver {
             List<Board> neighbours = boardHelper.getNeighbouringStates(curr.getBoard());
             for (Board neighbour : neighbours) {
                 State child = new State(neighbour);
-                if (!frontier.contains(child) && !explored.contains(child)) {
+                if (!frontierSet.contains(child) && !explored.contains(child)) {
                     child.setId(counter++);
                     child.setParent(curr);
                     curr.getChildren().add(child);
                     frontier.push(child);
+                    frontierSet.add(child);
                 }
             }
         }
