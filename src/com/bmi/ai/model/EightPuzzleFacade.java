@@ -15,8 +15,4 @@ public interface EightPuzzleFacade {
     Statistics solvePuzzleByBFS(Board board);
     Statistics solvePuzzleByAStartManhattan(Board board);
     Statistics solvePuzzleByAStartEuclidean(Board board);
-    List<State> getParentLevelStates(int stateId);
-    List<State> getDirectChildStates(int stateId);
-
-    Integer getGoalCost();
 }
