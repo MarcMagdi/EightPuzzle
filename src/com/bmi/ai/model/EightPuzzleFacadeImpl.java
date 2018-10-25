@@ -71,9 +71,33 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
     }
 
     private List<State> processState(State state) {
-        List<State> states = addStateToMap(state, 0);
+//        List<State> states = addStateToMap(state, 0);
+        List<State> states = getPathFromGoalToInitialState(state);
         Collections.reverse(states);
         return states;
+    }
+
+    private List<State> getPathFromGoalToInitialState(State state) {
+        Stack<State> stack = new Stack<>();
+        stack.push(state);
+        while (!stack.isEmpty()) {
+            State curr = stack.pop();
+            if (BoardHelper.getInstance().isGoalBoard(curr.getBoard())) {
+                List<State> states = new ArrayList<>();
+                while (curr != null) {
+                    states.add(curr);
+                    curr = curr.getParent();
+                }
+                return states;
+            }
+            List<State> children = curr.getChildren();
+            if (children != null) {
+                for (State child : curr.getChildren()) {
+                    stack.push(child);
+                }
+            }
+        }
+        return null;
     }
 
     private List<State> addStateToMap(State state, Integer cost) {
@@ -89,8 +113,6 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
             }
         }
         for (State child : state.getChildren()) {
-            BoardHelper boardHelper = BoardHelper.getInstance();
-            System.out.println(boardHelper.getBoardState(child.getBoard()) + " " + cost);
             List<State> childStates = addStateToMap(child, cost + 1);
             if (childStates != null) {
                 states = childStates;
