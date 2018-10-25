@@ -78,10 +78,13 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
     }
 
     private List<State> getPathFromGoalToInitialState(State state) {
+        Set<Integer> set = new HashSet<>();
         Stack<State> stack = new Stack<>();
         stack.push(state);
         while (!stack.isEmpty()) {
             State curr = stack.pop();
+            set.add(curr.getId());
+            System.out.println(set.size());
             if (BoardHelper.getInstance().isGoalBoard(curr.getBoard())) {
                 List<State> states = new ArrayList<>();
                 while (curr != null) {
@@ -93,6 +96,10 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
             List<State> children = curr.getChildren();
             if (children != null) {
                 for (State child : curr.getChildren()) {
+                    if (set.contains(child.getId())) {
+                        System.out.println("ERRROR: ");
+                        return null;
+                    }
                     stack.push(child);
                 }
             }
