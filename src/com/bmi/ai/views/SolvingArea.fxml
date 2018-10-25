@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.shape.Rectangle?>
@@ -22,33 +18,33 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <StackPane prefHeight="150.0" prefWidth="200.0">
+        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1">
+            <Text fx:id="box1" strokeType="OUTSIDE" strokeWidth="0.0" text="1" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
             </Text>
         </StackPane>
-        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+            <Text fx:id="box2" strokeType="OUTSIDE" strokeWidth="0.0" text="2" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
             </Text>
         </StackPane>
-        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
+        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+            <Text fx:id="box3" strokeType="OUTSIDE" strokeWidth="0.0" text="3" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
             </Text>
         </StackPane>
-        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+            <Text fx:id="box4" strokeType="OUTSIDE" strokeWidth="0.0" text="4" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
@@ -56,7 +52,7 @@
         </StackPane>
         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+            <Text fx:id="box5" strokeType="OUTSIDE" strokeWidth="0.0" text="5" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
@@ -64,15 +60,15 @@
         </StackPane>
         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+            <Text fx:id="box6" strokeType="OUTSIDE" strokeWidth="0.0" text="6" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
             </Text>
         </StackPane>
-        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7">
+            <Text fx:id="box7" strokeType="OUTSIDE" strokeWidth="0.0" text="7" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
@@ -80,7 +76,7 @@
         </StackPane>
         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="8">
+            <Text fx:id="box8" strokeType="OUTSIDE" strokeWidth="0.0" text="8" onMouseClicked="#testMethod">
                 <font>
                     <Font size="46.0" />
                 </font>
@@ -88,6 +84,11 @@
         </StackPane>
         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+            <Text fx:id="box9" strokeType="OUTSIDE" strokeWidth="0.0" onMouseClicked="#testMethod">
+                <font>
+                    <Font size="46.0" />
+                </font>
+            </Text>
         </StackPane>
     </children>
 </GridPane>
