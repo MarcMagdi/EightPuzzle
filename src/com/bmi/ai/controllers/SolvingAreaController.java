@@ -15,6 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -41,7 +45,16 @@ public class SolvingAreaController implements Initializable {
     public Text box9;
     private List<Text> boxes;
 
-
+    public List<StackPane> stackPanes;
+    public StackPane stack1;
+    public StackPane stack2;
+    public StackPane stack3;
+    public StackPane stack4;
+    public StackPane stack5;
+    public StackPane stack6;
+    public StackPane stack7;
+    public StackPane stack8;
+    public StackPane stack9;
 
     @FXML
     private GridPane gridPane;
@@ -60,6 +73,22 @@ public class SolvingAreaController implements Initializable {
         boxes.add(box8);
         boxes.add(box9);
 
+        this.stackPanes = new ArrayList<>();
+        stackPanes.add(stack1);
+        stackPanes.add(stack2);
+        stackPanes.add(stack3);
+        stackPanes.add(stack4);
+        stackPanes.add(stack5);
+        stackPanes.add(stack6);
+        stackPanes.add(stack7);
+        stackPanes.add(stack8);
+        stackPanes.add(stack9);
+
+        List<Node> children = stackPanes.get(8).getChildren();
+        Rectangle rectangle = (Rectangle) children.get(0);
+        Text value = (Text) children.get(1);
+        rectangle.setStroke(Color.BLACK);
+        rectangle.setStrokeWidth(3);
 //        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
 //        Board board = new Board(matrix);
 //        PuzzleSolver solver = new BFSPuzzleSolver();
@@ -69,12 +98,6 @@ public class SolvingAreaController implements Initializable {
 //        } catch (InvalidArgumentException e) {
 //            e.printStackTrace();
 //        }
-        gridPane.add(new Label("test"), 2, 2, 1, 1);
-
-    }
-
-    public void testMethod(MouseEvent mouseEvent) {
-        System.out.println(mouseEvent.getButton().name());
     }
 
     public void showState(State state) {
@@ -92,11 +115,16 @@ public class SolvingAreaController implements Initializable {
     }
 
     @FXML
-    private void clickGrid(MouseEvent event) {
+    private void cellSelected(MouseEvent event) {
         Node source = (Node)event.getSource() ;
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
-
-        System.out.println(colIndex + ' ' + rowIndex);
+        StackPane stackPane = (StackPane) gridPane.getChildren().get(rowIndex*3+colIndex);
+        List<Node> children = stackPane.getChildren();
+        Rectangle rectangle = (Rectangle) children.get(0);
+        Text value = (Text) children.get(1);
+        rectangle.setStroke(Color.BLACK);
+        rectangle.setStrokeWidth(3);
+        System.out.println(colIndex + "    " + rowIndex);
     }
 }
