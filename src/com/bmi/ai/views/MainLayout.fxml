@@ -17,6 +17,6 @@
         <fx:include source="Numbers.fxml" fx:id="numbers" />
     </right>
     <bottom>
-        <fx:include source="MainActions.fxml" />
+        <fx:include source="MainActions.fxml" fx:id="actions"/>
     </bottom>
 </BorderPane>

@@ -6,8 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="105.0" prefWidth="631.0" BorderPane.alignment="CENTER">
+<Pane prefHeight="105.0" prefWidth="631.0" BorderPane.alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.bmi.ai.controllers.ActionsController">
     <children>
-        <Button layoutX="90.0" layoutY="40.0" mnemonicParsing="false" text="Solve" />
+        <Button layoutX="90.0" layoutY="40.0" mnemonicParsing="false" text="Solve" onMouseClicked="#solve"/>
     </children>
 </Pane>

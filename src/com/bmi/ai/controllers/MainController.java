@@ -21,14 +21,22 @@ public class MainController implements Initializable {
     @FXML
     private NumbersController numbersController;
 
+    @FXML
+    private ActionsController actionsController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         solvingAreaController.init(this);
         numbersController.init(this);
+        actionsController.init(this);
     }
 
     void updateValue(String value) {
         this.solvingAreaController.updateGridCell(value);
         this.solvingAreaController.resetAllStackes();
+    }
+
+    char[][] getInitialState() {
+        return this.solvingAreaController.getInitialState();
     }
 }

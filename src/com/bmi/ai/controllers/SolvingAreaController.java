@@ -1,6 +1,5 @@
 package com.bmi.ai.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
@@ -35,6 +34,8 @@ import java.util.ResourceBundle;
  * Friday 25 October 2018
  */
 public class SolvingAreaController implements Initializable {
+    private final static int TEXT = 1;
+    private final static int RECT = 0;
     private List<StackPane> stackPanes;
     public StackPane stack1;
     public StackPane stack2;
@@ -199,5 +200,22 @@ public class SolvingAreaController implements Initializable {
             }
         }
         return gridPane;
+    }
+
+    char[][] getInitialState() {
+        char[][] values = new char[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Text text = (Text)stackPanes.get(i * 3 + j).getChildren().get(TEXT);
+                if (text.getText().equals("E"))
+                    values[i][j] = '0';
+                else if (text.getText().length() == 0)
+                    values[i][j] = ' ';
+                else
+                    values[i][j] = text.getText().charAt(0);
+            }
+        }
+
+        return values;
     }
 }
