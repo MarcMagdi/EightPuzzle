@@ -4,6 +4,7 @@ import com.bmi.ai.model.EightPuzzleFacade;
 import com.bmi.ai.model.EightPuzzleFacadeImpl;
 import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
+import com.bmi.ai.models.Statistics;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -45,8 +46,8 @@ public class ActionsController implements Initializable {
         boolean solvable = isSolvable(initState);
         if (validState && solvable) {
             errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByBFS(new Board(initState));
-            this.mainController.showPath(states);
+            Statistics statistics = puzzleFacade.solvePuzzleByBFS(new Board(initState));
+            this.mainController.showPath(statistics);
         } else if (!validState) {
             errorLabel.setText("Invalid Input");
         } else {
@@ -60,8 +61,8 @@ public class ActionsController implements Initializable {
         boolean solvable = isSolvable(initState);
         if (validState && solvable) {
             errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByDFS(new Board(initState));
-            this.mainController.showPath(states);
+            Statistics statistics = puzzleFacade.solvePuzzleByDFS(new Board(initState));
+            this.mainController.showPath(statistics);
         } else if (!validState) {
             errorLabel.setText("Invalid Input");
         } else {
@@ -75,8 +76,8 @@ public class ActionsController implements Initializable {
         boolean solvable = isSolvable(initState);
         if (validState && solvable) {
             errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByAStartManhattan(new Board(initState));
-            this.mainController.showPath(states);
+            Statistics statistics = puzzleFacade.solvePuzzleByAStartManhattan(new Board(initState));
+            this.mainController.showPath(statistics);
         } else if (!validState) {
             errorLabel.setText("Invalid Input");
         } else {
@@ -90,8 +91,8 @@ public class ActionsController implements Initializable {
         boolean solvable = isSolvable(initState);
         if (validState && solvable) {
             errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByAStartEuclidean(new Board(initState));
-            this.mainController.showPath(states);
+            Statistics statistics = puzzleFacade.solvePuzzleByAStartEuclidean(new Board(initState));
+            this.mainController.showPath(statistics);
         } else if (!validState) {
             errorLabel.setText("Invalid Input");
         } else {

@@ -164,13 +164,6 @@ public class SolvingAreaController implements Initializable {
     void resetAllStackes() {
         scrollPane.setContent(this.initialNode);
         scrollPane.setPannable(true);
-//        for (StackPane stackPane : stackPanes) {
-//            Rectangle rectangle = (Rectangle) stackPane.getChildren().get(0);
-//            rectangle.setStrokeWidth(1);
-//            rectangle.setFill(Color.DODGERBLUE);
-//            Text text = (Text) stackPane.getChildren().get(1);
-//            text.setText("");
-//        }
         selectedCell = null;
         selectedRowIndex = -1;
         selectedColIndex = -1;

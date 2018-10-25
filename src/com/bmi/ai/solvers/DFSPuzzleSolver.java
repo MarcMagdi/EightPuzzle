@@ -3,8 +3,11 @@ package com.bmi.ai.solvers;
 import com.bmi.ai.helpers.BoardHelper;
 import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
+import com.bmi.ai.models.Statistics;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +26,9 @@ public class DFSPuzzleSolver implements PuzzleSolver {
     }
 
     @Override
-    public State solve(Board board) {
+    public Statistics solve(Board board) {
+        Statistics statistics = new Statistics();
+        Instant start = Instant.now();
         Stack<State> frontier = new Stack<>();
         Set<State> frontierSet = new HashSet<>();
         Set<State> explored = new HashSet<>();
@@ -35,9 +40,13 @@ public class DFSPuzzleSolver implements PuzzleSolver {
             State curr = frontier.pop();
             frontierSet.remove(curr);
             explored.add(curr);
-//            System.out.println(explored.size());
             if (boardHelper.isGoalBoard(curr.getBoard())) {
-                return initial;
+                Instant end = Instant.now();
+                long timeElapsed = Duration.between(start, end).toMillis();
+                statistics.setRunningTime(timeElapsed);
+                statistics.setInitalState(initial);
+                statistics.setNodesExpanded(explored.size());
+                return statistics;
             }
             List<Board> neighbours = boardHelper.getNeighbouringStates(curr.getBoard());
             for (Board neighbour : neighbours) {
@@ -51,6 +60,6 @@ public class DFSPuzzleSolver implements PuzzleSolver {
                 }
             }
         }
-        return initial;
+        return null;
     }
 }

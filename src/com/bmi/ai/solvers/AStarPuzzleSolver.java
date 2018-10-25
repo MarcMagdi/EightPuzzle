@@ -5,8 +5,11 @@ import com.bmi.ai.models.Board;
 import com.bmi.ai.heuristics.Heuristic;
 import com.bmi.ai.models.HeuristicState;
 import com.bmi.ai.models.State;
+import com.bmi.ai.models.Statistics;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -27,7 +30,9 @@ public class AStarPuzzleSolver implements PuzzleSolver {
     }
 
     @Override
-    public State solve(Board board) {
+    public Statistics solve(Board board) {
+        Statistics statistics = new Statistics();
+        Instant start = Instant.now();
         PriorityQueue<HeuristicState> frontier = new PriorityQueue<>();
         Set<State> frontierSet = new HashSet<>();
         Set<State> explored = new HashSet<>();
@@ -39,9 +44,13 @@ public class AStarPuzzleSolver implements PuzzleSolver {
             HeuristicState curr = frontier.poll();
             frontierSet.remove(curr);
             explored.add(curr);
-//            boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
-                return initial;
+                Instant end = Instant.now();
+                long timeElapsed = Duration.between(start, end).toMillis();
+                statistics.setRunningTime(timeElapsed);
+                statistics.setInitalState(initial);
+                statistics.setNodesExpanded(explored.size());
+                return statistics;
             }
             List<Board> neighbours = boardHelper.getNeighbouringStates(curr.getBoard());
             for (Board neighbour : neighbours) {
@@ -65,7 +74,7 @@ public class AStarPuzzleSolver implements PuzzleSolver {
                 }
             }
         }
-        return initial;
+        return null;
     }
 
     private HeuristicState getStateFromFrontiers(PriorityQueue<HeuristicState> frontiers,

@@ -1,14 +1,17 @@
 package com.bmi.ai.models;
 
+import java.util.List;
+
 /**
  * Created by programajor on 10/25/18.
  */
 public class Statistics {
     private State initalState;
+    private List<State> states;
     private int costOfPath;
-    private int nodesExpaned;
+    private int nodesExpanded;
     private int searchDepth;
-    private float runningTime;
+    private long runningTime;
 
     public State getInitalState() {
         return initalState;
@@ -16,6 +19,14 @@ public class Statistics {
 
     public void setInitalState(State initalState) {
         this.initalState = initalState;
+    }
+
+    public List<State> getStates() {
+        return states;
+    }
+
+    public void setStates(List<State> states) {
+        this.states = states;
     }
 
     public int getCostOfPath() {
@@ -26,12 +37,12 @@ public class Statistics {
         this.costOfPath = costOfPath;
     }
 
-    public int getNodesExpaned() {
-        return nodesExpaned;
+    public int getNodesExpanded() {
+        return nodesExpanded;
     }
 
-    public void setNodesExpaned(int nodesExpaned) {
-        this.nodesExpaned = nodesExpaned;
+    public void setNodesExpanded(int nodesExpanded) {
+        this.nodesExpanded = nodesExpanded;
     }
 
     public int getSearchDepth() {
@@ -42,11 +53,11 @@ public class Statistics {
         this.searchDepth = searchDepth;
     }
 
-    public float getRunningTime() {
+    public long getRunningTime() {
         return runningTime;
     }
 
-    public void setRunningTime(float runningTime) {
+    public void setRunningTime(long runningTime) {
         this.runningTime = runningTime;
     }
 }

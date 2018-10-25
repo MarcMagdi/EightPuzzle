@@ -1,6 +1,7 @@
 package com.bmi.ai.controllers;
 
 import com.bmi.ai.models.State;
+import com.bmi.ai.models.Statistics;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,18 +51,19 @@ public class MainController implements Initializable {
 
     void updateValue(String value) {
         this.solvingAreaController.updateGridCell(value);
-//        this.solvingAreaController.resetAllStackes();
     }
 
     char[][] getInitialState() {
         return this.solvingAreaController.getInitialState();
     }
 
-    void showPath(List<State> states) {
-        this.solvingAreaController.showPath(states);
+    void showPath(Statistics statistics) {
+        this.solvingAreaController.showPath(statistics.getStates());
+        this.numbersController.showStatistics(statistics);
     }
 
     void reset() {
         this.solvingAreaController.resetAllStackes();
+        this.numbersController.resetStatistics();
     }
 }

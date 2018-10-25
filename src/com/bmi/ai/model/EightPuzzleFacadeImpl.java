@@ -5,43 +5,70 @@ import com.bmi.ai.heuristics.EuclideanHeuristic;
 import com.bmi.ai.heuristics.ManhattanHeuristic;
 import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
+import com.bmi.ai.models.Statistics;
 import com.bmi.ai.solvers.AStarPuzzleSolver;
 import com.bmi.ai.solvers.BFSPuzzleSolver;
 import com.bmi.ai.solvers.DFSPuzzleSolver;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 /**
  * Created by programajor on 10/25/18.
  */
 public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
-
     private Map<Integer, State> map;
     private Integer goalCost;
+    private Integer maxDepth;
 
     @Override
-    public List<State> solvePuzzleByDFS(Board board) {
-        State state = new DFSPuzzleSolver().solve(board);
-        return processState(state);
+    public Statistics solvePuzzleByDFS(Board board) {
+        this.goalCost = 0;
+        this.maxDepth = 0;
+        Statistics statistics = new DFSPuzzleSolver().solve(board);
+        State state = statistics.getInitalState();
+        statistics.setStates(processState(state));
+        statistics.setCostOfPath(this.goalCost);
+        statistics.setSearchDepth(this.maxDepth);
+        return statistics;
     }
 
     @Override
-    public List<State> solvePuzzleByBFS(Board board) {
-        State state = new BFSPuzzleSolver().solve(board);
-        return processState(state);
+    public Statistics solvePuzzleByBFS(Board board) {
+        this.goalCost = 0;
+        this.maxDepth = 0;
+        Statistics statistics = new BFSPuzzleSolver().solve(board);
+        State state = statistics.getInitalState();
+        statistics.setStates(processState(state));
+        statistics.setCostOfPath(this.goalCost);
+        statistics.setSearchDepth(this.maxDepth);
+        return statistics;
     }
 
     @Override
-    public List<State> solvePuzzleByAStartManhattan(Board board) {
-        State state = new AStarPuzzleSolver(new ManhattanHeuristic()).solve(board);
-        return processState(state);
+    public Statistics solvePuzzleByAStartManhattan(Board board) {
+        this.goalCost = 0;
+        this.maxDepth = 0;
+        Statistics statistics = new AStarPuzzleSolver(new ManhattanHeuristic()).solve(board);
+        State state = statistics.getInitalState();
+        statistics.setStates(processState(state));
+        statistics.setCostOfPath(this.goalCost);
+        statistics.setSearchDepth(this.maxDepth);
+        return statistics;
     }
 
     @Override
-    public List<State> solvePuzzleByAStartEuclidean(Board board) {
-        State state = new AStarPuzzleSolver(new EuclideanHeuristic()).solve(board);
-        return processState(state);
+    public Statistics solvePuzzleByAStartEuclidean(Board board) {
+        this.goalCost = 0;
+        this.maxDepth = 0;
+        Statistics statistics = new AStarPuzzleSolver(new EuclideanHeuristic()).solve(board);
+        State state = statistics.getInitalState();
+        statistics.setStates(processState(state));
+        statistics.setCostOfPath(this.goalCost);
+        statistics.setSearchDepth(this.maxDepth);
+        return statistics;
     }
 
     private List<State> processState(State state) {
@@ -54,6 +81,7 @@ public class EightPuzzleFacadeImpl implements EightPuzzleFacade {
     private List<State> addStateToMap(State state, Integer cost) {
         List<State> states = null;
         map.put(state.getId(), state);
+        this.maxDepth = Math.max(this.maxDepth, cost);
         if (BoardHelper.getInstance().isGoalBoard(state.getBoard())) {
             this.goalCost = cost;
             State curr = state;
