@@ -40,26 +40,32 @@ public class Board {
             for (int j = 0; j < 3; j++) {
                 if (newMatrix[i][j] != oldMatrix[i][j] && newMatrix[i][j] != '0') {
                     difference.value = newMatrix[i][j];
-                    difference.row = i;
-                    difference.column = j;
-                    difference.direction = getDirection(newMatrix[i][j], i, j, oldMatrix);
-                    break;
+                    difference.direction = getDirection(newMatrix[i][j], i, j, oldMatrix, difference);
+                    return difference;
                 }
             }
         }
         return difference;
     }
 
-    private Directions getDirection(char c, int x, int y, char[][] matrix) {
+    private Directions getDirection(char c, int x, int y, char[][] matrix, Difference difference) {
         Directions direction;
         if (x + 1 < 3 && matrix[x+1][y] == c) {
+            difference.row = x+1;
+            difference.column = y;
             direction = UP;
         } else if (x - 1 >= 0 && matrix[x-1][y] == c) {
             direction = DOWN;
+            difference.row = x-1;
+            difference.column = y;
         } else if (y + 1 < 3 && matrix[x][y+1] == c) {
-            return LEFT;
+            direction = LEFT;
+            difference.row = x;
+            difference.column = y + 1;
         } else {
-            return RIGHT;
+            direction = RIGHT;
+            difference.row = x;
+            difference.column = y - 1;
         }
 
         return  direction;

@@ -120,7 +120,7 @@ public class SolvingAreaController implements Initializable {
         selectedCell = null;
     }
 
-    GridPane createPuzzleInstance(State state, int index) {
+    GridPane createPuzzleInstance(State state, int index, Difference difference) {
         GridPane gridPane = new GridPane();
         gridPane.setLayoutY(index*300);
         gridPane.setMaxHeight(250.0);
@@ -166,6 +166,9 @@ public class SolvingAreaController implements Initializable {
                 if (c == '0') {
                     rectangle.setFill(Color.WHITE);
                     text.setText("");
+                } else if (difference != null && i == difference.row && j == difference.column) {
+                    rectangle.setFill(Color.GREEN);
+                    text.setText(c + difference.direction.toString());
                 } else {
                     rectangle.setFill(Color.DODGERBLUE);
                     text.setText(c + "");
@@ -195,18 +198,14 @@ public class SolvingAreaController implements Initializable {
 
     void showPath(List<State> states) {
         AnchorPane anchorPane = new AnchorPane();
-        int index = 0;
-        boolean first = true;
-        State prevState = null;
-        for (State state : states) {
-            anchorPane.getChildren().add(createPuzzleInstance(state, index++));
-            if (!first) {
-                Difference difference = state.getDifference(prevState);
-                System.out.println(difference.value + " " + difference.direction);
+        for (int i = 0; i < states.size(); i++) {
+            Difference difference = null;
+            if (i != states.size() - 1) {
+                difference = states.get(i+1).getDifference(states.get(i));
             }
-            prevState = state;
-            first = false;
+            anchorPane.getChildren().add(createPuzzleInstance(states.get(i), i, difference));
         }
+
         scrollPane.setContent(anchorPane);
         scrollPane.setPannable(true);
     }

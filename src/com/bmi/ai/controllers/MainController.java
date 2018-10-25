@@ -55,7 +55,7 @@ public class MainController implements Initializable {
         return this.solvingAreaController.getInitialState();
     }
 
-    public void showPath(List<State> states) {
+    void showPath(List<State> states) {
         this.solvingAreaController.showPath(states);
     }
 }

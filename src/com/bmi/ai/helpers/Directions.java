@@ -9,4 +9,15 @@ package com.bmi.ai.helpers;
  */
 public enum Directions {
     UP, DOWN, LEFT, RIGHT;
+
+    public String toString() {
+        switch (this) {
+            case UP: return "⬆";
+            case DOWN: return "⬇";
+            case LEFT: return "⬅";
+            case RIGHT: return "➡";
+        }
+
+        return "";
+    }
 }
