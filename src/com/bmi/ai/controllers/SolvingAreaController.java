@@ -101,40 +101,29 @@ public class SolvingAreaController implements Initializable {
                 Text text = (Text) selectedCell.getChildren().get(1);
                 text.setText(value);
             }
-            if (!(selectedColIndex == 2 && selectedRowIndex == 2)) {
-                if (selectedColIndex != 2) {
-                    selectedColIndex++;
-                } else {
-                    selectedRowIndex++;
-                    selectedColIndex = 0;
-                }
-                selectedCell = (StackPane) gridPane.getChildren()
-                                                   .get(selectedRowIndex * 3 + selectedColIndex);
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        StackPane cell = (StackPane) gridPane.getChildren()
-                                .get(i * 3 + j);
-                        if (cell != selectedCell) {
-                            Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
-                            rectangle.setStrokeWidth(0);
-                            rectangle.setFill(Color.GRAY);
-                        } else {
-                            Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
-                            rectangle.setStrokeWidth(1);
-                            if (((Text) cell.getChildren().get(1)).getText().equals("E"))
-                                rectangle.setFill(Color.WHITE);
-                            else
-                                rectangle.setFill(Color.DODGERBLUE);
-                        }
-                    }
-                }
+            processPointerAdvance();
+        }
+    }
+
+    private void processPointerAdvance() {
+        if (!(selectedColIndex == 2 && selectedRowIndex == 2)) {
+            if (selectedColIndex != 2) {
+                selectedColIndex++;
             } else {
-                selectedCell = null;
-                selectedColIndex = -1;
-                selectedRowIndex = -1;
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        StackPane cell = (StackPane) gridPane.getChildren().get(i*3 + j);
+                selectedRowIndex++;
+                selectedColIndex = 0;
+            }
+            selectedCell = (StackPane) gridPane.getChildren()
+                                               .get(selectedRowIndex * 3 + selectedColIndex);
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    StackPane cell = (StackPane) gridPane.getChildren()
+                            .get(i * 3 + j);
+                    if (cell != selectedCell) {
+                        Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
+                        rectangle.setStrokeWidth(0);
+                        rectangle.setFill(Color.GRAY);
+                    } else {
                         Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
                         rectangle.setStrokeWidth(1);
                         if (((Text) cell.getChildren().get(1)).getText().equals("E"))
@@ -142,6 +131,21 @@ public class SolvingAreaController implements Initializable {
                         else
                             rectangle.setFill(Color.DODGERBLUE);
                     }
+                }
+            }
+        } else {
+            selectedCell = null;
+            selectedColIndex = -1;
+            selectedRowIndex = -1;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    StackPane cell = (StackPane) gridPane.getChildren().get(i*3 + j);
+                    Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
+                    rectangle.setStrokeWidth(1);
+                    if (((Text) cell.getChildren().get(1)).getText().equals("E"))
+                        rectangle.setFill(Color.WHITE);
+                    else
+                        rectangle.setFill(Color.DODGERBLUE);
                 }
             }
         }
