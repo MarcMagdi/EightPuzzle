@@ -35,7 +35,7 @@ public class DFSPuzzleSolver implements PuzzleSolver {
             State curr = frontier.pop();
             frontierSet.remove(curr);
             explored.add(curr);
-//            boardHelper.printState(curr);
+//            System.out.println(explored.size());
             if (boardHelper.isGoalBoard(curr.getBoard())) {
                 return initial;
             }
