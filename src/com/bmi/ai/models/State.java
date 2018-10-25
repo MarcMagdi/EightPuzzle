@@ -5,6 +5,7 @@ import com.bmi.ai.helpers.Directions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by programajor on 10/18/18.
@@ -53,12 +54,17 @@ public class State {
         this.children = children;
     }
 
+    public Difference getDifference(State state) {
+        return this.board.getDifference(state.board);
+    }
+
     @Override
     public boolean equals(Object obj) {
         return this.getBoard().equals(((State) obj).getBoard());
     }
 
-    public Difference getDifference(State state) {
-        return this.board.getDifference(state.board);
+    @Override
+    public int hashCode() {
+        return BoardHelper.getInstance().getBoardState(board).hashCode();
     }
 }
