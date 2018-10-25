@@ -60,15 +60,17 @@ public class SolvingAreaController implements Initializable {
         boxes.add(box8);
         boxes.add(box9);
 
-        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
-        Board board = new Board(matrix);
-        PuzzleSolver solver = new BFSPuzzleSolver();
-        try {
-            State s = solver.solve(board);
-            showState(s);
-        } catch (InvalidArgumentException e) {
-            e.printStackTrace();
-        }
+//        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
+//        Board board = new Board(matrix);
+//        PuzzleSolver solver = new BFSPuzzleSolver();
+//        try {
+//            State s = solver.solve(board);
+//            showState(s);
+//        } catch (InvalidArgumentException e) {
+//            e.printStackTrace();
+//        }
+        gridPane.add(new Label("test"), 2, 2, 1, 1);
+
     }
 
     public void testMethod(MouseEvent mouseEvent) {
@@ -87,7 +89,6 @@ public class SolvingAreaController implements Initializable {
                 }
             }
         }
-        gridPane.add(new Label("test"), 2, 2, 1, 1);
     }
 
     @FXML
