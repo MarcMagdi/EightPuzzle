@@ -4,11 +4,8 @@ import com.bmi.ai.model.EightPuzzleFacade;
 import com.bmi.ai.model.EightPuzzleFacadeImpl;
 import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 

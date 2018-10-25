@@ -1,22 +1,13 @@
 package com.bmi.ai.controllers;
 
 import javafx.fxml.FXML;
-import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
-import com.bmi.ai.solvers.BFSPuzzleSolver;
-import com.bmi.ai.solvers.PuzzleSolver;
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
