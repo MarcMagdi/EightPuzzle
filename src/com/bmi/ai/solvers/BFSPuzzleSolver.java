@@ -22,12 +22,15 @@ public class BFSPuzzleSolver implements PuzzleSolver {
     @Override
     public State solve(Board board) {
         Queue<State> frontier = new LinkedList<>();
+        Set<State> frontierSet = new HashSet<>();
         Set<State> explored = new HashSet<>();
         State initial = new State(board);
         initial.setId(counter++);
         frontier.add(initial);
+        frontierSet.add(initial);
         while (!frontier.isEmpty()) {
             State curr = frontier.poll();
+            frontierSet.remove(curr);
             explored.add(curr);
 //            boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
@@ -36,11 +39,12 @@ public class BFSPuzzleSolver implements PuzzleSolver {
             List<Board> neighbours = boardHelper.getNeighbouringStates(curr.getBoard());
             for (Board neighbour : neighbours) {
                 State child = new State(neighbour);
-                if (!frontier.contains(child) && !explored.contains(child)) {
+                if (!frontierSet.contains(child) && !explored.contains(child)) {
                     child.setId(counter++);
                     child.setParent(curr);
                     curr.getChildren().add(child);
                     frontier.add(child);
+                    frontierSet.add(child);
                 }
             }
         }
