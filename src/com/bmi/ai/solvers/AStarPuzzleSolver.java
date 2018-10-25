@@ -36,7 +36,7 @@ public class AStarPuzzleSolver implements PuzzleSolver {
         while (!frontier.isEmpty()) {
             HeuristicState curr = frontier.poll();
             explored.add(curr);
-            boardHelper.printState(curr);
+//            boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
                 return initial;
             }

@@ -32,7 +32,7 @@ public class DFSPuzzleSolver implements PuzzleSolver {
         while (!frontier.isEmpty()) {
             State curr = frontier.pop();
             explored.add(curr);
-            boardHelper.printState(curr);
+//            boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
                 return initial;
             }

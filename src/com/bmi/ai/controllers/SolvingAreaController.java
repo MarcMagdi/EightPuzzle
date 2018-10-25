@@ -78,33 +78,18 @@ public class SolvingAreaController implements Initializable {
         stackPanes.add(stack8);
         stackPanes.add(stack9);
 
-        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
-        Board board = new Board(matrix);
-        PuzzleSolver solver = new BFSPuzzleSolver();
-        try {
-            State s = solver.solve(board);
-            AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add(createPuzzleInstance(s));
-            scrollPane.setContent(anchorPane);
-            scrollPane.setPannable(true);
-//            showState(s);
-        } catch (InvalidArgumentException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showState(State state) {
-        char[][] matrix = state.getBoard().getMatrix();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                char c = matrix[i][j];
-                if (c == '0') {
-                    ((Text) stackPanes.get(3*i + j).getChildren().get(1)).setText("");
-                } else {
-                    ((Text) stackPanes.get(3*i + j).getChildren().get(1)).setText(c + "");
-                }
-            }
-        }
+//        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
+//        Board board = new Board(matrix);
+//        PuzzleSolver solver = new BFSPuzzleSolver();
+//        try {
+//            State s = solver.solve(board);
+//            AnchorPane anchorPane = new AnchorPane();
+//            anchorPane.getChildren().add(createPuzzleInstance(s));
+//            scrollPane.setContent(anchorPane);
+//            scrollPane.setPannable(true);
+//        } catch (InvalidArgumentException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @FXML
