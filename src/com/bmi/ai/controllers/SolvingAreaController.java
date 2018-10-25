@@ -34,7 +34,7 @@ import java.util.ResourceBundle;
  * Friday 25 October 2018
  */
 public class SolvingAreaController implements Initializable {
-    public List<StackPane> stackPanes;
+    private List<StackPane> stackPanes;
     public StackPane stack1;
     public StackPane stack2;
     public StackPane stack3;
@@ -45,9 +45,19 @@ public class SolvingAreaController implements Initializable {
     public StackPane stack8;
     public StackPane stack9;
 
+    private MainController mainController;
+    private Text selectedCell;
+
     @FXML
     private GridPane gridPane;
 
+    /**
+     * Initializes the reference to the reference to the main controller pane.
+     * @param mainController reference to the the parent.
+     */
+    public final void init(final MainController mainController) {
+        this.mainController = mainController;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,11 +72,6 @@ public class SolvingAreaController implements Initializable {
         stackPanes.add(stack8);
         stackPanes.add(stack9);
 
-        List<Node> children = stackPanes.get(8).getChildren();
-        Rectangle rectangle = (Rectangle) children.get(0);
-        Text value = (Text) children.get(1);
-        rectangle.setStroke(Color.BLACK);
-        rectangle.setStrokeWidth(3);
 //        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
 //        Board board = new Board(matrix);
 //        PuzzleSolver solver = new BFSPuzzleSolver();
@@ -101,10 +106,16 @@ public class SolvingAreaController implements Initializable {
         StackPane stackPane = (StackPane) gridPane.getChildren().get(rowIndex*3+colIndex);
         List<Node> children = stackPane.getChildren();
         Rectangle rectangle = (Rectangle) children.get(0);
-        Text value = (Text) children.get(1);
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(3);
-        System.out.println(colIndex + "    " + rowIndex);
+        rectangle.setFill(Color.DODGERBLUE);
+        this.selectedCell = (Text)children.get(1);
+    }
+
+    void updateGridCell(String value) {
+        if(selectedCell != null) {
+            selectedCell.setText(value);
+        }
     }
 
     private void dimAllStackes() {
@@ -113,5 +124,15 @@ public class SolvingAreaController implements Initializable {
             rectangle.setStrokeWidth(0);
             rectangle.setFill(Color.GRAY);
         }
+    }
+
+    void resetAllStackes() {
+        for (StackPane stackPane : stackPanes) {
+            Rectangle rectangle = (Rectangle) stackPane.getChildren().get(0);
+            rectangle.setStrokeWidth(1);
+            rectangle.setFill(Color.DODGERBLUE);
+        }
+
+        selectedCell = null;
     }
 }
