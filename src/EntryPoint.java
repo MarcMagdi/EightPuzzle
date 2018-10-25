@@ -3,6 +3,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -23,7 +25,12 @@ public class EntryPoint extends Application {
         String resourceName = "com/bmi/ai/views/MainLayout.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(resourceName));
         fullScreenApp(primaryStage);
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+//        scene.get
+//        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+//            System.out.println(key.getText());
+//        });
+        primaryStage.setScene(scene);
         primaryStage.setTitle("Eight Puzzle Solver");
         primaryStage.show();
     }

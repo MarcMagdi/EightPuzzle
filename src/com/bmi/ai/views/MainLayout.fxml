@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bmi.ai.controllers.MainController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bmi.ai.controllers.MainController" fx:id="borderPane">
     <top>
         <fx:include source="Menu.fxml" />
     </top>

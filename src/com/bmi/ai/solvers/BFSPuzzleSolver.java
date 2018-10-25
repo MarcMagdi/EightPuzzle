@@ -29,7 +29,7 @@ public class BFSPuzzleSolver implements PuzzleSolver {
         while (!frontier.isEmpty()) {
             State curr = frontier.poll();
             explored.add(curr);
-//            boardHelper.printState(curr);
+    //            boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
                 return initial;
             }
