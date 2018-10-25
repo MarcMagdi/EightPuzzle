@@ -51,6 +51,8 @@ public class SolvingAreaController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
 
+    private Node initialNode;
+
     /**
      * Initializes the reference to the reference to the main controller pane.
      * @param mainController reference to the the parent.
@@ -160,15 +162,18 @@ public class SolvingAreaController implements Initializable {
     }
 
     void resetAllStackes() {
+        scrollPane.setContent(this.initialNode);
+        scrollPane.setPannable(true);
         for (StackPane stackPane : stackPanes) {
             Rectangle rectangle = (Rectangle) stackPane.getChildren().get(0);
             rectangle.setStrokeWidth(1);
-            if (((Text) stackPane.getChildren().get(1)).getText().equals("E"))
-                rectangle.setFill(Color.WHITE);
-            else
-                rectangle.setFill(Color.DODGERBLUE);
+            rectangle.setFill(Color.DODGERBLUE);
+            Text text = (Text) stackPane.getChildren().get(1);
+            text.setText("");
         }
         selectedCell = null;
+        selectedRowIndex = -1;
+        selectedColIndex = -1;
     }
 
     GridPane createPuzzleInstance(State state, int index, Difference difference) {
@@ -256,7 +261,9 @@ public class SolvingAreaController implements Initializable {
             }
             anchorPane.getChildren().add(createPuzzleInstance(states.get(i), i, difference));
         }
-
+        if (this.initialNode == null) {
+            this.initialNode = scrollPane.getContent();
+        }
         scrollPane.setContent(anchorPane);
         scrollPane.setPannable(true);
     }

@@ -60,4 +60,8 @@ public class MainController implements Initializable {
     void showPath(List<State> states) {
         this.solvingAreaController.showPath(states);
     }
+
+    void reset() {
+        this.solvingAreaController.resetAllStackes();
+    }
 }

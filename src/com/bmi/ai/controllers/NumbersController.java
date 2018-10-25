@@ -30,4 +30,8 @@ public class NumbersController implements Initializable {
         Node source = (Node)event.getSource() ;
         this.mainController.updateValue(((Button)source).getText());
     }
+
+    public void reset(MouseEvent mouseEvent) {
+        this.mainController.reset();
+    }
 }
