@@ -128,8 +128,9 @@ public class SolvingAreaController implements Initializable {
         selectedCell = null;
     }
 
-    GridPane createPuzzleInstance(State state) {
+    GridPane createPuzzleInstance(State state, int index) {
         GridPane gridPane = new GridPane();
+        gridPane.setLayoutY(index*300);
         gridPane.setMaxHeight(250.0);
         gridPane.setMaxWidth(250.0);
         gridPane.setMinWidth(250.0);
@@ -201,13 +202,10 @@ public class SolvingAreaController implements Initializable {
     }
 
     void showPath(List<State> states) {
-        System.out.println(states.size());
         AnchorPane anchorPane = new AnchorPane();
-//        List<GridPane> gridPanes = new ArrayList<>();
+        int index = 0;
         for (State state : states) {
-            anchorPane.getChildren().add(createPuzzleInstance(state));
-
-//            gridPanes.add(createPuzzleInstance(state));
+            anchorPane.getChildren().add(createPuzzleInstance(state, index++));
         }
         scrollPane.setContent(anchorPane);
         scrollPane.setPannable(true);
