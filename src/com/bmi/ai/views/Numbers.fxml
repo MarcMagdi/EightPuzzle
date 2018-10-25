@@ -6,7 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="404.0" prefWidth="176.0" BorderPane.alignment="CENTER">
+<Pane prefHeight="404.0" prefWidth="176.0" BorderPane.alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.bmi.ai.controllers.NumbersController">
     <children>
         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" />
         <Button layoutX="96.0" layoutY="14.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" />
