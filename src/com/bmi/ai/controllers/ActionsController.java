@@ -39,14 +39,63 @@ public class ActionsController implements Initializable {
         this.mainController = mainController;
     }
 
-    @FXML
-    private void solve(MouseEvent event) {
+    public void solveByBFS(MouseEvent mouseEvent) {
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
-        if (validState) {
+        boolean solvable = isSolvable(initState);
+        if (validState && solvable) {
             errorLabel.setText("");
-        } else {
+            List<State> states = puzzleFacade.solvePuzzleByBFS(new Board(initState));
+            this.mainController.showPath(states);
+        } else if (!validState) {
             errorLabel.setText("Invalid Input");
+        } else {
+            errorLabel.setText("This puzzle is not solvable.");
+        }
+    }
+
+    public void solveByDFS(MouseEvent mouseEvent) {
+        char[][] initState = this.mainController.getInitialState();
+        boolean validState = isValid(initState);
+        boolean solvable = isSolvable(initState);
+        if (validState && solvable) {
+            errorLabel.setText("");
+            List<State> states = puzzleFacade.solvePuzzleByDFS(new Board(initState));
+            this.mainController.showPath(states);
+        } else if (!validState) {
+            errorLabel.setText("Invalid Input");
+        } else {
+            errorLabel.setText("This puzzle is not solvable.");
+        }
+    }
+
+    public void solveByAStarManhattan(MouseEvent mouseEvent) {
+        char[][] initState = this.mainController.getInitialState();
+        boolean validState = isValid(initState);
+        boolean solvable = isSolvable(initState);
+        if (validState && solvable) {
+            errorLabel.setText("");
+            List<State> states = puzzleFacade.solvePuzzleByAStartManhattan(new Board(initState));
+            this.mainController.showPath(states);
+        } else if (!validState) {
+            errorLabel.setText("Invalid Input");
+        } else {
+            errorLabel.setText("This puzzle is not solvable.");
+        }
+    }
+
+    public void solveByAStarEuclidean(MouseEvent mouseEvent) {
+        char[][] initState = this.mainController.getInitialState();
+        boolean validState = isValid(initState);
+        boolean solvable = isSolvable(initState);
+        if (validState && solvable) {
+            errorLabel.setText("");
+            List<State> states = puzzleFacade.solvePuzzleByAStartEuclidean(new Board(initState));
+            this.mainController.showPath(states);
+        } else if (!validState) {
+            errorLabel.setText("Invalid Input");
+        } else {
+            errorLabel.setText("This puzzle is not solvable.");
         }
     }
 
@@ -60,51 +109,25 @@ public class ActionsController implements Initializable {
         return digits.size() == 9 && !digits.contains(' ');
     }
 
-    public void solveByBFS(MouseEvent mouseEvent) {
-        char[][] initState = this.mainController.getInitialState();
-        boolean validState = isValid(initState);
-        if (validState) {
-            errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByBFS(new Board(initState));
-            this.mainController.showPath(states);
-        } else {
-            errorLabel.setText("Invalid Input");
-        }
+    private boolean isSolvable(char[][] initState) {
+        int inv_count = 0;
+        int[] arr = getArr(initState);
+        for (int i = 0; i < 9 - 1; i++)
+            for (int j = i+1; j < 9; j++)
+                // Value 0 is used for empty space
+                if (arr[j] != 0 && arr[i] != 0 &&  arr[i] > arr[j])
+                    inv_count++;
+        return inv_count%2 == 0;
     }
 
-    public void solveByDFS(MouseEvent mouseEvent) {
-        char[][] initState = this.mainController.getInitialState();
-        boolean validState = isValid(initState);
-        if (validState) {
-            errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByDFS(new Board(initState));
-            this.mainController.showPath(states);
-        } else {
-            errorLabel.setText("Invalid Input");
+    private int[] getArr(char[][] state) {
+        int arr[] = new int[9];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                arr[3*i + j] = state[i][j] - '0';
+            }
         }
-    }
 
-    public void solveByAStarManhattan(MouseEvent mouseEvent) {
-        char[][] initState = this.mainController.getInitialState();
-        boolean validState = isValid(initState);
-        if (validState) {
-            errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByAStartManhattan(new Board(initState));
-            this.mainController.showPath(states);
-        } else {
-            errorLabel.setText("Invalid Input");
-        }
-    }
-
-    public void solveByAStarEuclidean(MouseEvent mouseEvent) {
-        char[][] initState = this.mainController.getInitialState();
-        boolean validState = isValid(initState);
-        if (validState) {
-            errorLabel.setText("");
-            List<State> states = puzzleFacade.solvePuzzleByAStartEuclidean(new Board(initState));
-            this.mainController.showPath(states);
-        } else {
-            errorLabel.setText("Invalid Input");
-        }
+        return arr;
     }
 }
