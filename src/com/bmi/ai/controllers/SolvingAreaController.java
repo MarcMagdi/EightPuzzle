@@ -1,5 +1,6 @@
 package com.bmi.ai.controllers;
 
+import com.bmi.ai.models.Difference;
 import javafx.fxml.FXML;
 import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
@@ -217,8 +218,16 @@ public class SolvingAreaController implements Initializable {
     void showPath(List<State> states) {
         AnchorPane anchorPane = new AnchorPane();
         int index = 0;
+        boolean first = true;
+        State prevState = null;
         for (State state : states) {
             anchorPane.getChildren().add(createPuzzleInstance(state, index++));
+            if (!first) {
+                Difference difference = state.getDifference(prevState);
+                System.out.println(difference.value + " " + difference.direction);
+            }
+            prevState = state;
+            first = false;
         }
         scrollPane.setContent(anchorPane);
         scrollPane.setPannable(true);

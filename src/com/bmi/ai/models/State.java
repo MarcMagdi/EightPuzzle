@@ -1,6 +1,7 @@
 package com.bmi.ai.models;
 
 import com.bmi.ai.helpers.BoardHelper;
+import com.bmi.ai.helpers.Directions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,5 +56,9 @@ public class State {
     @Override
     public boolean equals(Object obj) {
         return this.getBoard().equals(((State) obj).getBoard());
+    }
+
+    public Difference getDifference(State state) {
+        return this.board.getDifference(state.board);
     }
 }
