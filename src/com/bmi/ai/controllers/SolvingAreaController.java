@@ -255,7 +255,6 @@ public class SolvingAreaController implements Initializable {
                 difference = states.get(i+1).getDifference(states.get(i));
             }
             anchorPane.getChildren().add(createPuzzleInstance(states.get(i), i, difference));
-            System.out.println(i);
         }
         if (this.initialNode == null) {
             this.initialNode = scrollPane.getContent();
