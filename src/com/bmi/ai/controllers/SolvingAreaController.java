@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
@@ -53,6 +54,9 @@ public class SolvingAreaController implements Initializable {
     @FXML
     private GridPane gridPane;
 
+    @FXML
+    private ScrollPane scrollPane;
+
     /**
      * Initializes the reference to the reference to the main controller pane.
      * @param mainController reference to the the parent.
@@ -74,15 +78,19 @@ public class SolvingAreaController implements Initializable {
         stackPanes.add(stack8);
         stackPanes.add(stack9);
 
-//        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
-//        Board board = new Board(matrix);
-//        PuzzleSolver solver = new BFSPuzzleSolver();
-//        try {
-//            State s = solver.solve(board);
+        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
+        Board board = new Board(matrix);
+        PuzzleSolver solver = new BFSPuzzleSolver();
+        try {
+            State s = solver.solve(board);
+            AnchorPane anchorPane = new AnchorPane();
+            anchorPane.getChildren().add(createPuzzleInstance(s));
+            scrollPane.setContent(anchorPane);
+            scrollPane.setPannable(true);
 //            showState(s);
-//        } catch (InvalidArgumentException e) {
-//            e.printStackTrace();
-//        }
+        } catch (InvalidArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showState(State state) {
@@ -145,7 +153,6 @@ public class SolvingAreaController implements Initializable {
             else
                 rectangle.setFill(Color.DODGERBLUE);
         }
-
         selectedCell = null;
     }
 
@@ -153,6 +160,10 @@ public class SolvingAreaController implements Initializable {
         GridPane gridPane = new GridPane();
         gridPane.setMaxHeight(250.0);
         gridPane.setMaxWidth(250.0);
+        gridPane.setMinWidth(250.0);
+        gridPane.setMinHeight(250.0);
+        gridPane.setPrefHeight(250.0);
+        gridPane.setPrefWidth(250.0);
         for (int i = 0; i < 3; i++) {
             ColumnConstraints column = new ColumnConstraints();
             column.setHgrow(Priority.SOMETIMES);
@@ -177,10 +188,10 @@ public class SolvingAreaController implements Initializable {
                 Rectangle rectangle = new Rectangle();
                 rectangle.setArcHeight(5.0);
                 rectangle.setArcWidth(5.0);
-                rectangle.setFill(Paint.valueOf("#1e90ff"));
+                rectangle.setFill(Color.DODGERBLUE);
                 rectangle.setHeight(80.0);
                 rectangle.setWidth(80.0);
-                rectangle.setStroke(Paint.valueOf("#000000"));
+                rectangle.setStroke(Color.BLACK);
                 rectangle.setStrokeType(StrokeType.INSIDE);
                 Text text = new Text();
                 text.setStrokeType(StrokeType.OUTSIDE);
@@ -188,15 +199,15 @@ public class SolvingAreaController implements Initializable {
                 Font font = new Font(46.0);
                 text.setFont(font);
                 if (c == '0') {
-                    rectangle.setFill(Paint.valueOf("#ffffff"));
+                    rectangle.setFill(Color.WHITE);
                     text.setText("");
                 } else {
-                    rectangle.setFill(Paint.valueOf("#1e90ff"));
+                    rectangle.setFill(Color.DODGERBLUE);
                     text.setText(c + "");
                 }
                 stackPane.getChildren().addAll(rectangle, text);
-                gridPane.getChildren().add(stackPane);
-                gridPane.add(stackPane, i, j);
+//                gridPane.getChildren().add(stackPane);
+                gridPane.add(stackPane, j, i);
             }
         }
         return gridPane;
