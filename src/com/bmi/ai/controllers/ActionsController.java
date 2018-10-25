@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -22,6 +23,9 @@ public class ActionsController implements Initializable {
 
     private MainController mainController;
 
+    @FXML
+    public Label errorLabel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -35,7 +39,11 @@ public class ActionsController implements Initializable {
     private void solve(MouseEvent event) {
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
-        System.out.println(validState);
+        if (validState) {
+            errorLabel.setText("");
+        } else {
+            errorLabel.setText("Invalid Input");
+        }
     }
 
     private boolean isValid(char[][] initState) {
