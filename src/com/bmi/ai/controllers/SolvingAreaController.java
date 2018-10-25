@@ -2,22 +2,13 @@ package com.bmi.ai.controllers;
 
 import com.bmi.ai.models.Difference;
 import javafx.fxml.FXML;
-import com.bmi.ai.models.Board;
 import com.bmi.ai.models.State;
-import com.bmi.ai.solvers.BFSPuzzleSolver;
-import com.bmi.ai.solvers.PuzzleSolver;
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
@@ -78,25 +69,12 @@ public class SolvingAreaController implements Initializable {
         stackPanes.add(stack7);
         stackPanes.add(stack8);
         stackPanes.add(stack9);
-
-//        char matrix[][] = new char[][]{{'1', '2', '5'}, {'3', '4', '0'}, {'6', '7', '8'}};
-//        Board board = new Board(matrix);
-//        PuzzleSolver solver = new BFSPuzzleSolver();
-//        try {
-//            State s = solver.solve(board);
-//            AnchorPane anchorPane = new AnchorPane();
-//            anchorPane.getChildren().add(createPuzzleInstance(s));
-//            scrollPane.setContent(anchorPane);
-//            scrollPane.setPannable(true);
-//        } catch (InvalidArgumentException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @FXML
     private void cellSelected(MouseEvent event) {
         this.dimAllStackes();
-        Node source = (Node)event.getSource() ;
+        Node source = (Node)event.getSource();
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
         StackPane stackPane = (StackPane) gridPane.getChildren().get(rowIndex*3+colIndex);
@@ -110,7 +88,7 @@ public class SolvingAreaController implements Initializable {
 
     void updateGridCell(String value) {
         if(selectedCell != null) {
-            if (value.equals("Emp")) {
+            if (value.equals("Emp") || value.equals("0")) {
                 Text text = (Text) selectedCell.getChildren().get(1);
                 text.setText("E");
                 Rectangle rectangle = (Rectangle) selectedCell.getChildren().get(0);
