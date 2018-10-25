@@ -34,17 +34,6 @@ import java.util.ResourceBundle;
  * Friday 25 October 2018
  */
 public class SolvingAreaController implements Initializable {
-    public Text box1;
-    public Text box2;
-    public Text box3;
-    public Text box4;
-    public Text box5;
-    public Text box6;
-    public Text box7;
-    public Text box8;
-    public Text box9;
-    private List<Text> boxes;
-
     public List<StackPane> stackPanes;
     public StackPane stack1;
     public StackPane stack2;
@@ -62,17 +51,6 @@ public class SolvingAreaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.boxes = new ArrayList<>();
-        boxes.add(box1);
-        boxes.add(box2);
-        boxes.add(box3);
-        boxes.add(box4);
-        boxes.add(box5);
-        boxes.add(box6);
-        boxes.add(box7);
-        boxes.add(box8);
-        boxes.add(box9);
-
         this.stackPanes = new ArrayList<>();
         stackPanes.add(stack1);
         stackPanes.add(stack2);
@@ -106,9 +84,9 @@ public class SolvingAreaController implements Initializable {
             for (int j = 0; j < 3; j++) {
                 char c = matrix[i][j];
                 if (c == '0') {
-                    boxes.get(3*i + j).setText("");
+                    ((Text) stackPanes.get(3*i + j).getChildren().get(1)).setText("");
                 } else {
-                    boxes.get(3*i + j).setText(c + "");
+                    ((Text) stackPanes.get(3*i + j).getChildren().get(1)).setText(c + "");
                 }
             }
         }
