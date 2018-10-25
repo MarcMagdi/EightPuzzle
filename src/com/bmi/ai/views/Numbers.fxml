@@ -18,5 +18,6 @@
         <Button onMouseClicked="#updateValue" layoutX="96.0" layoutY="165.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="6" />
         <Button onMouseClicked="#updateValue" layoutX="14.0" layoutY="236.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="7" />
         <Button onMouseClicked="#updateValue" layoutX="96.0" layoutY="236.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="8" />
+        <Button onMouseClicked="#updateValue" layoutX="14.0" layoutY="307.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Emp" />
     </children>
 </Pane>
