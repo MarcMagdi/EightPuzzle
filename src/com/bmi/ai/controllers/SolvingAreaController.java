@@ -116,6 +116,7 @@ public class SolvingAreaController implements Initializable {
 
     @FXML
     private void cellSelected(MouseEvent event) {
+        this.dimAllStackes();
         Node source = (Node)event.getSource() ;
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
@@ -126,5 +127,13 @@ public class SolvingAreaController implements Initializable {
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(3);
         System.out.println(colIndex + "    " + rowIndex);
+    }
+
+    private void dimAllStackes() {
+        for (StackPane stackPane : stackPanes) {
+            Rectangle rectangle = (Rectangle) stackPane.getChildren().get(0);
+            rectangle.setStrokeWidth(0);
+            rectangle.setFill(Color.GRAY);
+        }
     }
 }
