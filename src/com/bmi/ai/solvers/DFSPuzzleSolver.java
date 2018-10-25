@@ -14,34 +14,39 @@ import java.util.Stack;
  * Created by programajor on 10/16/18.
  */
 public class DFSPuzzleSolver implements PuzzleSolver {
-
+    private int counter;
     private BoardHelper boardHelper;
 
     public DFSPuzzleSolver() {
+        this.counter = 0;
         this.boardHelper = BoardHelper.getInstance();
     }
 
     @Override
-    public void solve(Board board) throws InvalidArgumentException {
+    public State solve(Board board) throws InvalidArgumentException {
         Stack<State> frontier = new Stack<>();
         Set<State> explored = new HashSet<>();
-        frontier.push(new State(board));
+        State initial = new State(board);
+        initial.setId(counter++);
+        frontier.push(initial);
         while (!frontier.isEmpty()) {
             State curr = frontier.pop();
             explored.add(curr);
             boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
-                return;
+                return initial;
             }
             List<Board> neighbours = boardHelper.getNeighbouringStates(curr.getBoard());
             for (Board neighbour : neighbours) {
                 State child = new State(neighbour);
                 if (!frontier.contains(child) && !explored.contains(child)) {
+                    child.setId(counter++);
                     child.setParent(curr);
                     curr.getChildren().add(child);
                     frontier.push(child);
                 }
             }
         }
+        return initial;
     }
 }

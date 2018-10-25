@@ -11,34 +11,39 @@ import java.util.*;
  * Created by programajor on 10/16/18.
  */
 public class BFSPuzzleSolver implements PuzzleSolver {
-
+    private int counter;
     private BoardHelper boardHelper;
 
     public BFSPuzzleSolver() {
+        this.counter = 0;
         this.boardHelper = BoardHelper.getInstance();
     }
 
     @Override
-    public void solve(Board board) throws InvalidArgumentException {
+    public State solve(Board board) throws InvalidArgumentException {
         Queue<State> frontier = new LinkedList<>();
         Set<State> explored = new HashSet<>();
-        frontier.add(new State(board));
+        State initial = new State(board);
+        initial.setId(counter++);
+        frontier.add(initial);
         while (!frontier.isEmpty()) {
             State curr = frontier.poll();
             explored.add(curr);
             boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
-                return;
+                return initial;
             }
             List<Board> neighbours = boardHelper.getNeighbouringStates(curr.getBoard());
             for (Board neighbour : neighbours) {
                 State child = new State(neighbour);
                 if (!frontier.contains(child) && !explored.contains(child)) {
+                    child.setId(counter++);
                     child.setParent(curr);
                     curr.getChildren().add(child);
                     frontier.add(child);
                 }
             }
         }
+        return initial;
     }
 }

@@ -16,26 +16,29 @@ import java.util.Set;
  * Created by programajor on 10/18/18.
  */
 public class AStarPuzzleSolver implements PuzzleSolver {
-
+    private int counter;
     private Heuristic heuristic;
     private BoardHelper boardHelper;
 
     public AStarPuzzleSolver(Heuristic heuristic) {
+        this.counter = 0;
         this.heuristic = heuristic;
         this.boardHelper = BoardHelper.getInstance();
     }
 
     @Override
-    public void solve(Board board) throws InvalidArgumentException {
+    public State solve(Board board) throws InvalidArgumentException {
         PriorityQueue<HeuristicState> frontier = new PriorityQueue<>();
         Set<State> explored = new HashSet<>();
-        frontier.add(new HeuristicState(board,  heuristic.getStateValue(board), 0));
+        HeuristicState initial = new HeuristicState(board,  heuristic.getStateValue(board), 0);
+        initial.setId(counter++);
+        frontier.add(initial);
         while (!frontier.isEmpty()) {
             HeuristicState curr = frontier.poll();
             explored.add(curr);
             boardHelper.printState(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
-                return;
+                return initial;
             }
             List<Board> neighbours = boardHelper.getNeighbouringStates(curr.getBoard());
             for (Board neighbour : neighbours) {
@@ -43,6 +46,7 @@ public class AStarPuzzleSolver implements PuzzleSolver {
                                                 heuristic.getStateValue(neighbour),
                                                 curr.getActualCost() + 1);
                 if (!frontier.contains(child) && !explored.contains(child)) {
+                    child.setId(counter++);
                     child.setParent(curr);
                     curr.getChildren().add(child);
                     frontier.add(child);
@@ -57,6 +61,7 @@ public class AStarPuzzleSolver implements PuzzleSolver {
                 }
             }
         }
+        return initial;
     }
 
     private HeuristicState getStateFromFrontiers(PriorityQueue<HeuristicState> frontiers,

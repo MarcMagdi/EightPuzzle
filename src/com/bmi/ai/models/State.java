@@ -9,6 +9,7 @@ import java.util.List;
  * Created by programajor on 10/18/18.
  */
 public class State {
+    private int id;
     private Board board;
     private State parent;
     private List<State> children;
@@ -17,6 +18,14 @@ public class State {
         this.board = board;
         this.parent = null;
         this.children = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Board getBoard() {
