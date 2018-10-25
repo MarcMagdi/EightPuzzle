@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.bmi.ai.controllers.MainController" fx:id="borderPane">
-    <top>
-        <fx:include source="Menu.fxml" />
-    </top>
     <center>
         <fx:include source="SolvingArea.fxml" fx:id="solvingArea" />
     </center>

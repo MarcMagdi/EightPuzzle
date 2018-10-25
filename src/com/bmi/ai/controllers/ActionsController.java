@@ -3,16 +3,13 @@ package com.bmi.ai.controllers;
 import com.bmi.ai.model.EightPuzzleFacade;
 import com.bmi.ai.model.EightPuzzleFacadeImpl;
 import com.bmi.ai.models.Board;
-import com.bmi.ai.models.State;
 import com.bmi.ai.models.Statistics;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
 import java.util.HashSet;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -41,6 +38,7 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByBFS(MouseEvent mouseEvent) {
+        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
@@ -56,6 +54,7 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByDFS(MouseEvent mouseEvent) {
+        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
@@ -71,6 +70,7 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByAStarManhattan(MouseEvent mouseEvent) {
+        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
@@ -86,6 +86,7 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByAStarEuclidean(MouseEvent mouseEvent) {
+        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
