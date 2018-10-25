@@ -42,6 +42,8 @@ public class SolvingAreaController implements Initializable {
 
     private MainController mainController;
     private StackPane selectedCell;
+    private int selectedRowIndex = -1;
+    private int selectedColIndex = -1;
 
     @FXML
     private GridPane gridPane;
@@ -77,6 +79,8 @@ public class SolvingAreaController implements Initializable {
         Node source = (Node)event.getSource();
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
+        this.selectedColIndex = colIndex;
+        this.selectedRowIndex = rowIndex;
         StackPane stackPane = (StackPane) gridPane.getChildren().get(rowIndex*3+colIndex);
         List<Node> children = stackPane.getChildren();
         Rectangle rectangle = (Rectangle) children.get(0);
@@ -87,7 +91,7 @@ public class SolvingAreaController implements Initializable {
     }
 
     void updateGridCell(String value) {
-        if(selectedCell != null) {
+        if (selectedCell != null) {
             if (value.equals("Emp") || value.equals("0")) {
                 Text text = (Text) selectedCell.getChildren().get(1);
                 text.setText("E");
@@ -96,6 +100,49 @@ public class SolvingAreaController implements Initializable {
             } else {
                 Text text = (Text) selectedCell.getChildren().get(1);
                 text.setText(value);
+            }
+            if (!(selectedColIndex == 2 && selectedRowIndex == 2)) {
+                if (selectedColIndex != 2) {
+                    selectedColIndex++;
+                } else {
+                    selectedRowIndex++;
+                    selectedColIndex = 0;
+                }
+                selectedCell = (StackPane) gridPane.getChildren()
+                                                   .get(selectedRowIndex * 3 + selectedColIndex);
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        StackPane cell = (StackPane) gridPane.getChildren()
+                                .get(i * 3 + j);
+                        if (cell != selectedCell) {
+                            Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
+                            rectangle.setStrokeWidth(0);
+                            rectangle.setFill(Color.GRAY);
+                        } else {
+                            Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
+                            rectangle.setStrokeWidth(1);
+                            if (((Text) cell.getChildren().get(1)).getText().equals("E"))
+                                rectangle.setFill(Color.WHITE);
+                            else
+                                rectangle.setFill(Color.DODGERBLUE);
+                        }
+                    }
+                }
+            } else {
+                selectedCell = null;
+                selectedColIndex = -1;
+                selectedRowIndex = -1;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        StackPane cell = (StackPane) gridPane.getChildren().get(i*3 + j);
+                        Rectangle rectangle = (Rectangle) cell.getChildren().get(0);
+                        rectangle.setStrokeWidth(1);
+                        if (((Text) cell.getChildren().get(1)).getText().equals("E"))
+                            rectangle.setFill(Color.WHITE);
+                        else
+                            rectangle.setFill(Color.DODGERBLUE);
+                    }
+                }
             }
         }
     }

@@ -36,7 +36,9 @@ public class MainController implements Initializable {
         borderPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                if (event.getText().length() == 1 && Character.isDigit(event.getText().charAt(0))) {
+                if (event.getText().length() == 1
+                        && Character.isDigit(event.getText().charAt(0))
+                        && event.getText().charAt(0) != '9') {
                     updateValue(event.getText());
                 }
             }
@@ -48,7 +50,7 @@ public class MainController implements Initializable {
 
     void updateValue(String value) {
         this.solvingAreaController.updateGridCell(value);
-        this.solvingAreaController.resetAllStackes();
+//        this.solvingAreaController.resetAllStackes();
     }
 
     char[][] getInitialState() {
