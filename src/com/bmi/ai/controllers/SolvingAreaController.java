@@ -173,7 +173,8 @@ public class SolvingAreaController implements Initializable {
 
     GridPane createPuzzleInstance(State state, int index, Difference difference) {
         GridPane gridPane = new GridPane();
-        gridPane.setLayoutY(index*300);
+        gridPane.setLayoutY((index/3) * 300);
+        gridPane.setLayoutX((index%3) * 300);
         gridPane.setMaxHeight(250.0);
         gridPane.setMaxWidth(250.0);
         gridPane.setMinWidth(250.0);
