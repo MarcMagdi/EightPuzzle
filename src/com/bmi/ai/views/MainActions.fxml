@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="105.0" prefWidth="631.0" BorderPane.alignment="CENTER">
+    <children>
+        <Button layoutX="90.0" layoutY="40.0" mnemonicParsing="false" text="Solve" />
+    </children>
+</Pane>

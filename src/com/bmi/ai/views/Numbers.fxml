@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="404.0" prefWidth="176.0" BorderPane.alignment="CENTER">
+    <children>
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="1" />
+        <Button layoutX="96.0" layoutY="14.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="2" />
+        <Button layoutX="14.0" layoutY="88.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="3" />
+        <Button layoutX="96.0" layoutY="88.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="4" />
+        <Button layoutX="14.0" layoutY="165.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="5" />
+        <Button layoutX="96.0" layoutY="165.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="6" />
+        <Button layoutX="14.0" layoutY="236.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="7" />
+        <Button layoutX="96.0" layoutY="236.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="8" />
+    </children>
+</Pane>
