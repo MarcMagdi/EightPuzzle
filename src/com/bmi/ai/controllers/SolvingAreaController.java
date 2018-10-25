@@ -48,7 +48,7 @@ public class SolvingAreaController implements Initializable {
     public StackPane stack9;
 
     private MainController mainController;
-    private Text selectedCell;
+    private StackPane selectedCell;
 
     @FXML
     private GridPane gridPane;
@@ -118,12 +118,20 @@ public class SolvingAreaController implements Initializable {
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(3);
         rectangle.setFill(Color.DODGERBLUE);
-        this.selectedCell = (Text)children.get(1);
+        this.selectedCell = stackPane;
     }
 
     void updateGridCell(String value) {
         if(selectedCell != null) {
-            selectedCell.setText(value);
+            if (value.equals("Emp")) {
+                Text text = (Text) selectedCell.getChildren().get(1);
+                text.setText("E");
+                Rectangle rectangle = (Rectangle) selectedCell.getChildren().get(0);
+                rectangle.setFill(Color.WHITE);
+            } else {
+                Text text = (Text) selectedCell.getChildren().get(1);
+                text.setText(value);
+            }
         }
     }
 
@@ -139,7 +147,10 @@ public class SolvingAreaController implements Initializable {
         for (StackPane stackPane : stackPanes) {
             Rectangle rectangle = (Rectangle) stackPane.getChildren().get(0);
             rectangle.setStrokeWidth(1);
-            rectangle.setFill(Color.DODGERBLUE);
+            if (((Text) stackPane.getChildren().get(1)).getText().equals("E"))
+                rectangle.setFill(Color.WHITE);
+            else
+                rectangle.setFill(Color.DODGERBLUE);
         }
         selectedCell = null;
     }
