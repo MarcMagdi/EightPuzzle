@@ -13,12 +13,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -134,5 +135,58 @@ public class SolvingAreaController implements Initializable {
         }
 
         selectedCell = null;
+    }
+
+    GridPane createPuzzleInstance(State state) {
+        GridPane gridPane = new GridPane();
+        gridPane.setMaxHeight(250.0);
+        gridPane.setMaxWidth(250.0);
+        for (int i = 0; i < 3; i++) {
+            ColumnConstraints column = new ColumnConstraints();
+            column.setHgrow(Priority.SOMETIMES);
+            column.setMinWidth(10.0);
+            column.setPrefWidth(100.0);
+            gridPane.getColumnConstraints().add(column);
+        }
+        for (int i = 0; i < 3; i++) {
+            RowConstraints row = new RowConstraints();
+            row.setVgrow(Priority.SOMETIMES);
+            row.setMinHeight(10.0);
+            row.setPrefHeight(30.0);
+            gridPane.getRowConstraints().add(row);
+        }
+        char[][] matrix = state.getBoard().getMatrix();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                char c = matrix[i][j];
+                StackPane stackPane = new StackPane();
+                stackPane.setPrefHeight(150.0);
+                stackPane.prefWidth(200.0);
+                Rectangle rectangle = new Rectangle();
+                rectangle.setArcHeight(5.0);
+                rectangle.setArcWidth(5.0);
+                rectangle.setFill(Paint.valueOf("#1e90ff"));
+                rectangle.setHeight(80.0);
+                rectangle.setWidth(80.0);
+                rectangle.setStroke(Paint.valueOf("#000000"));
+                rectangle.setStrokeType(StrokeType.INSIDE);
+                Text text = new Text();
+                text.setStrokeType(StrokeType.OUTSIDE);
+                text.setStrokeWidth(0.0);
+                Font font = new Font(46.0);
+                text.setFont(font);
+                if (c == '0') {
+                    rectangle.setFill(Paint.valueOf("#ffffff"));
+                    text.setText("");
+                } else {
+                    rectangle.setFill(Paint.valueOf("#1e90ff"));
+                    text.setText(c + "");
+                }
+                stackPane.getChildren().addAll(rectangle, text);
+                gridPane.getChildren().add(stackPane);
+                gridPane.add(stackPane, i, j);
+            }
+        }
+        return gridPane;
     }
 }
