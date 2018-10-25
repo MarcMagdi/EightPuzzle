@@ -38,7 +38,6 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByBFS(MouseEvent mouseEvent) {
-        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
@@ -54,7 +53,6 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByDFS(MouseEvent mouseEvent) {
-        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
@@ -70,7 +68,6 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByAStarManhattan(MouseEvent mouseEvent) {
-        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
@@ -86,7 +83,6 @@ public class ActionsController implements Initializable {
     }
 
     public void solveByAStarEuclidean(MouseEvent mouseEvent) {
-        this.mainController.reset();
         char[][] initState = this.mainController.getInitialState();
         boolean validState = isValid(initState);
         boolean solvable = isSolvable(initState);
