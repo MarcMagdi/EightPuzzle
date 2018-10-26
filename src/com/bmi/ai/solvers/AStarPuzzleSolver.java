@@ -10,10 +10,7 @@ import com.sun.javaws.exceptions.InvalidArgumentException;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by programajor on 10/18/18.
@@ -34,15 +31,15 @@ public class AStarPuzzleSolver implements PuzzleSolver {
         Statistics statistics = new Statistics();
         Instant start = Instant.now();
         PriorityQueue<HeuristicState> frontier = new PriorityQueue<>();
-        Set<State> frontierSet = new HashSet<>();
+        Map<State, State> frontierMap = new HashMap<>();
         Set<State> explored = new HashSet<>();
         HeuristicState initial = new HeuristicState(board,  heuristic.getStateValue(board), 0);
         initial.setId(counter++);
         frontier.add(initial);
-        frontierSet.add(initial);
+        frontierMap.put(initial, initial);
         while (!frontier.isEmpty()) {
             HeuristicState curr = frontier.poll();
-            frontierSet.remove(curr);
+            frontierMap.remove(curr);
             explored.add(curr);
             if (boardHelper.isGoalBoard(curr.getBoard())) {
                 Instant end = Instant.now();
@@ -57,14 +54,14 @@ public class AStarPuzzleSolver implements PuzzleSolver {
                 HeuristicState child = new HeuristicState(neighbour,
                                                 heuristic.getStateValue(neighbour),
                                                 curr.getActualCost() + 1);
-                if (!frontierSet.contains(child) && !explored.contains(child)) {
+                if (!frontierMap.containsKey(child) && !explored.contains(child)) {
                     child.setId(counter++);
                     child.setParent(curr);
                     curr.getChildren().add(child);
                     frontier.add(child);
-                    frontierSet.add(child);
+                    frontierMap.put(child, child);
                 } else {
-                    HeuristicState childInFrontier = getStateFromFrontiers(frontier, child);
+                    HeuristicState childInFrontier = (HeuristicState) frontierMap.get(child);
                     if (childInFrontier != null && childInFrontier.getActualCost() > child.getActualCost()) {
                         childInFrontier.getParent().getChildren().remove(childInFrontier);
                         childInFrontier.setParent(curr);
@@ -72,16 +69,6 @@ public class AStarPuzzleSolver implements PuzzleSolver {
                         curr.getChildren().add(childInFrontier);
                     }
                 }
-            }
-        }
-        return null;
-    }
-
-    private HeuristicState getStateFromFrontiers(PriorityQueue<HeuristicState> frontiers,
-                                                 HeuristicState state) {
-        for (HeuristicState heuristicState : frontiers) {
-            if (heuristicState.equals(state)) {
-                return heuristicState;
             }
         }
         return null;
