@@ -5,8 +5,8 @@ This is an Eight Puzzle Solver that can solve any solvable puzzle.
  - BFS
  - DFS
  - A* (two heuristic available)
- -- Euclidean Heuristic
- -- Manhattan Heuristic
+   - Euclidean Heuristic
+   - Manhattan Heuristic
  
 ![UI_START](/screenshots/1.png?raw=true)
 The solver guides you **step by step** to solve the puzzle and reports the followind data:
